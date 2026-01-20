@@ -105,7 +105,7 @@ const App: React.FC = () => {
       case 'feed':
         return <VideoFeed videos={MOCK_VIDEOS} onSwipe={handleSwipe} tripCount={trips.reduce((sum, t) => sum + t.items.length, 0)} />;
       case 'library':
-        return <Library saved={savedItems} tripItems={[]} onAddToTrip={addToTripLogic} onNavigateToTrip={() => setScreen('itinerary')} />;
+        return <Library saved={savedItems} trips={trips} onAddToTrip={addToTripLogic} onNavigateToTrip={() => setScreen('itinerary')} />;
       case 'itinerary':
         return <ItineraryBuilder trips={trips} onRemoveTrip={(id) => setTrips(prev => prev.filter(t => t.id !== id))} />;
       case 'instagram':
