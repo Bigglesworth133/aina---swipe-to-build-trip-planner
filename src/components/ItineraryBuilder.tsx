@@ -1,125 +1,164 @@
-import React from 'react';
-import { ItineraryItem, TimeSlot } from '../types';
-import { motion, Reorder } from 'framer-motion';
-import { Lock, Unlock, GripVertical, Trash2, MapPin, Clock, ChevronRight } from 'lucide-react';
-import { cn } from '../services/utils';
+import React, { useState } from 'react';
+import { Trip, VideoCard } from '../types';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Lock, Unlock, MapPin, Clock, ChevronRight, Trash2, ArrowLeft, Navigation as NavIcon, Droplets } from 'lucide-react';
 
 interface ItineraryBuilderProps {
-  itinerary: ItineraryItem[];
-  onRemove: (id: string) => void;
-  onUpdateItinerary?: (newItinerary: ItineraryItem[]) => void;
-  onBook?: () => void;
+  trips: Trip[];
+  onRemoveTrip: (id: string) => void;
 }
 
-const slotColors: Record<TimeSlot, string> = {
-  'Morning': 'from-blue-500/20 to-transparent',
-  'Afternoon': 'from-orange-500/20 to-transparent',
-  'Evening': 'from-purple-500/20 to-transparent'
-};
+const ItineraryBuilder: React.FC<ItineraryBuilderProps> = ({ trips, onRemoveTrip }) => {
+  const [selectedTripId, setSelectedTripId] = useState<string | null>(null);
 
-const ItineraryBuilder: React.FC<ItineraryBuilderProps> = ({ itinerary, onRemove, onUpdateItinerary, onBook }) => {
-  const days = Array.from(new Set(itinerary.map(item => item.day))).sort();
+  const selectedTrip = trips.find(t => t.id === selectedTripId);
 
-  return (
-    <div className="h-full w-full bg-black overflow-y-auto pb-40 pt-20 px-6 no-scrollbar">
-      <div className="mb-8">
-        <h1 className="text-4xl font-black uppercase tracking-tighter">Your Trip</h1>
-        <p className="text-primary text-[10px] font-black uppercase tracking-widest mt-1 italic">
-          Optimized for walking & transit
-        </p>
-      </div>
+  if (selectedTrip) {
+    return (
+      <div className="h-full w-full bg-black flex flex-col pt-24 px-6 overflow-y-auto pb-32 no-scrollbar">
+        <button
+          onClick={() => setSelectedTripId(null)}
+          className="flex items-center gap-2 text-white/40 mb-6 active:scale-95 transition-transform"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-[10px] font-black uppercase tracking-widest">Back to Trips</span>
+        </button>
 
-      {itinerary.length === 0 ? (
-        <div className="h-64 flex flex-col items-center justify-center text-center opacity-40">
-          <Clock className="w-12 h-12 mb-4" />
-          <p className="font-bold uppercase tracking-widest text-sm">Add some places from the feed<br />to start your itinerary</p>
+        <div className="space-y-2 mb-8">
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary">{selectedTrip.country}</span>
+          </div>
+          <h1 className="text-4xl font-black uppercase tracking-tighter">{selectedTrip.name}</h1>
         </div>
-      ) : (
+
+        {/* Hydration Reminder Card */}
+        <div className="bg-blue-500/10 border border-blue-500/20 p-6 rounded-3xl flex items-center gap-6 mb-8">
+          <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.4)]">
+            <Droplets className="text-white w-6 h-6" />
+          </div>
+          <div>
+            <p className="font-bold text-sm">Stay Hydrated!</p>
+            <p className="text-xs text-blue-400">It's 28°C in {selectedTrip.city}. Drink water every 2 hours.</p>
+          </div>
+        </div>
+
         <div className="space-y-12">
-          {days.map(day => (
+          {[1, 2].map(day => (
             <div key={day} className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="bg-white text-black w-12 h-12 rounded-2xl flex items-center justify-center font-black text-xl italic">
-                  D{day}
-                </div>
-                <div>
-                  <h2 className="text-2xl font-black uppercase tracking-tight">Day {day}</h2>
-                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-none">Exploring the city vibe</span>
-                </div>
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-black uppercase italic tracking-tighter text-white">Day {day}</h2>
+                <span className="text-[10px] font-black text-white/20 uppercase tracking-widest">Planned Route</span>
               </div>
 
-              <div className="space-y-4">
-                {itinerary
-                  .filter(item => item.day === day)
-                  .sort((a, b) => {
-                    const slots: TimeSlot[] = ['Morning', 'Afternoon', 'Evening'];
-                    return slots.indexOf(a.timeSlot) - slots.indexOf(b.timeSlot);
-                  })
-                  .map((item, idx) => (
+              <div className="space-y-4 relative ml-4">
+                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/20 to-transparent -ml-4" />
+
+                {selectedTrip.items.map((item, idx) => (
+                  <React.Fragment key={item.id}>
                     <motion.div
-                      key={item.id}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className={cn(
-                        "relative flex gap-4 p-4 rounded-3xl glass-dark border-l-4 overflow-hidden group",
-                        item.timeSlot === 'Morning' ? "border-l-blue-500" :
-                          item.timeSlot === 'Afternoon' ? "border-l-orange-500" : "border-l-purple-500"
-                      )}
+                      className="bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-3xl space-y-4"
                     >
-                      <div className={cn("absolute inset-0 bg-gradient-to-r opacity-30 pointer-events-none", slotColors[item.timeSlot])} />
-
-                      <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 z-10 border border-white/10">
-                        <img src={item.mediaPlaceholder} className="w-full h-full object-cover" alt={item.title} />
-                      </div>
-
-                      <div className="flex-1 min-w-0 z-10 space-y-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[9px] font-black uppercase tracking-widest text-white/40">{item.timeSlot}</span>
-                          <div className="flex items-center gap-2">
-                            <button className="text-white/20 hover:text-white transition-colors">
-                              {item.locked ? <Lock className="w-3.5 h-3.5" /> : <Unlock className="w-3.5 h-3.5" />}
-                            </button>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Clock className="w-3 h-3 text-white/40" />
+                            <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">{idx === 0 ? '09:30 AM' : '02:15 PM'}</span>
                           </div>
+                          <h3 className="font-black uppercase tracking-tight text-white">{item.title}</h3>
                         </div>
-                        <h3 className="text-sm font-black uppercase leading-tight truncate">{item.title}</h3>
-
-                        <div className="flex items-center gap-1 opacity-60">
-                          <MapPin className="w-3 h-3 text-primary" />
-                          <span className="text-[9px] font-bold uppercase tracking-wider truncate">{item.zone}</span>
-                        </div>
-
-                        <div className="pt-2">
-                          <span className="bg-primary/10 text-primary text-[8px] font-black px-2 py-0.5 rounded-full uppercase italic border border-primary/20">
-                            {idx % 2 === 0 ? "Perfect Morning Coffee" : "Crowd Favorite"}
-                          </span>
+                        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                          <Lock className="w-3 h-3 text-white/40" />
                         </div>
                       </div>
 
-                      <button
-                        onClick={() => onRemove(item.id)}
-                        className="absolute -right-12 group-hover:right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center transition-all"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center justify-between pt-2">
+                        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{item.zone}</span>
+                        <button className="flex items-center gap-2 text-primary font-black uppercase text-[10px] tracking-widest">
+                          Directions <NavIcon className="w-3 h-3" />
+                        </button>
+                      </div>
                     </motion.div>
-                  ))
-                }
+
+                    {idx < selectedTrip.items.length - 1 && (
+                      <div className="py-2 ml-4 flex items-center gap-3">
+                        <div className="h-[1px] w-8 bg-white/10" />
+                        <span className="text-[10px] font-black text-white/20 uppercase tracking-widest">15 mins walking (1.2 km)</span>
+                      </div>
+                    )}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           ))}
         </div>
-      )}
+      </div>
+    );
+  }
 
-      {itinerary.length > 0 && (
-        <div className="mt-12 space-y-4">
-          <button
-            onClick={onBook}
-            className="w-full bg-white text-black py-5 rounded-3xl font-black uppercase tracking-[0.3em] text-sm flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(255,255,255,0.1)] active:scale-95 transition-all"
-          >
-            Book Everything <ChevronRight className="w-5 h-5" />
-          </button>
-          <p className="text-center text-[9px] font-bold text-white/20 uppercase tracking-[0.2em]">Estimated Trip Cost: €1,240</p>
+  return (
+    <div className="h-full w-full bg-black flex flex-col pt-24 px-6 overflow-y-auto pb-32 no-scrollbar">
+      <div className="space-y-2 mb-8">
+        <h1 className="text-4xl font-black uppercase tracking-tighter">Your Adventures</h1>
+        <p className="text-white/60 text-sm">Explore your curated trips across the globe.</p>
+      </div>
+
+      {trips.length === 0 ? (
+        <div className="flex-1 flex flex-col items-center justify-center text-center p-8 space-y-4 opacity-40">
+          <MapPin className="w-12 h-12" />
+          <p className="text-sm font-bold uppercase tracking-widest">No trips created yet.<br />Swipe right on spots to start!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6">
+          {trips.map((trip) => (
+            <motion.div
+              key={trip.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              onClick={() => setSelectedTripId(trip.id)}
+              className="relative aspect-[4/3] rounded-[40px] overflow-hidden group active:scale-[0.98] transition-all"
+            >
+              <img
+                src={trip.items[0]?.mediaPlaceholder ? trip.items[0].mediaPlaceholder.replace('.mp4', '.jpg') : `https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600`}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                alt={trip.name}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
+
+              <div className="absolute top-6 left-6 flex items-center gap-2">
+                <div className="bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-white">{trip.country}</span>
+                </div>
+              </div>
+
+              <div className="absolute bottom-6 left-6 right-6">
+                <h3 className="text-2xl font-black uppercase tracking-tighter mb-1 text-white">{trip.name}</h3>
+                <div className="flex items-center gap-4 text-white/60 text-[10px] font-black uppercase tracking-widest">
+                  <span>{trip.items.length} spots</span>
+                  <div className="w-1 h-1 rounded-full bg-white/20" />
+                  <span>planned</span>
+                </div>
+              </div>
+
+              <div className="absolute bottom-6 right-6">
+                <div className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center shadow-2xl">
+                  <ChevronRight className="w-6 h-6" />
+                </div>
+              </div>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemoveTrip(trip.id);
+                }}
+                className="absolute top-6 right-6 w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <Trash2 className="w-4 h-4 text-white/60" />
+              </button>
+            </motion.div>
+          ))}
         </div>
       )}
     </div>

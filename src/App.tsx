@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { AppScreen, VideoCard, UserPreferences, ItineraryItem, SwipeEvent } from './types';
+import { AppScreen, VideoCard, UserPreferences, ItineraryItem, SwipeEvent, Trip } from './types';
 import { MOCK_VIDEOS } from './constants';
 import { generateItinerary } from './services/itineraryEngine';
 import Navigation from './components/Navigation';
@@ -7,6 +7,7 @@ import Onboarding from './components/Onboarding';
 import VideoFeed from './components/VideoFeed';
 import Library from './components/Library';
 import ItineraryBuilder from './components/ItineraryBuilder';
+import InstagramImport from './components/InstagramImport';
 import TripMode from './components/TripMode';
 import Booking from './components/Booking';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -17,7 +18,7 @@ const App: React.FC = () => {
   const [screen, setScreen] = useState<AppScreen>('onboarding');
   const [userPrefs, setUserPrefs] = useState<UserPreferences | null>(null);
   const [savedItems, setSavedItems] = useState<VideoCard[]>([]);
-  const [tripItems, setTripItems] = useState<VideoCard[]>([]);
+  const [trips, setTrips] = useState<Trip[]>([]);
   const [swipeHistory, setSwipeHistory] = useState<SwipeEvent[]>([]);
 
   // Load state from localStorage on mount
@@ -27,7 +28,7 @@ const App: React.FC = () => {
       try {
         const data = JSON.parse(stored);
         setSavedItems(data.savedItems || []);
-        setTripItems(data.tripItems || []);
+        setTrips(data.trips || []);
         if (data.userPrefs) {
           setUserPrefs(data.userPrefs);
           setScreen('feed');
@@ -42,15 +43,38 @@ const App: React.FC = () => {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       savedItems,
-      tripItems,
+      trips,
       userPrefs
     }));
-  }, [savedItems, tripItems, userPrefs]);
+  }, [savedItems, trips, userPrefs]);
 
   const handleOnboardingComplete = (prefs: UserPreferences) => {
     setUserPrefs(prefs);
     setScreen('feed');
   };
+
+  const addToTripLogic = useCallback((video: VideoCard) => {
+    setTrips(prev => {
+      const existingTripIdx = prev.findIndex(t => t.country === video.country);
+      if (existingTripIdx > -1) {
+        const newTrips = [...prev];
+        if (!newTrips[existingTripIdx].items.some(item => item.id === video.id)) {
+          newTrips[existingTripIdx].items = [...newTrips[existingTripIdx].items, video];
+        }
+        return newTrips;
+      } else {
+        const newTrip: Trip = {
+          id: Math.random().toString(36).substr(2, 9),
+          name: `${video.country} Adventure`,
+          city: video.city,
+          country: video.country,
+          items: [video],
+          createdAt: Date.now()
+        };
+        return [...prev, newTrip];
+      }
+    });
+  }, []);
 
   const handleSwipe = useCallback((videoId: string, action: 'like' | 'save' | 'add_to_trip' | 'skip') => {
     const video = MOCK_VIDEOS.find(v => v.id === videoId);
@@ -63,24 +87,15 @@ const App: React.FC = () => {
         setSavedItems(prev => [...prev, video]);
       }
     } else if (action === 'add_to_trip') {
-      if (!tripItems.some(item => item.id === videoId)) {
-        setTripItems(prev => [...prev, video]);
-      }
+      addToTripLogic(video);
     } else if (action === 'like') {
-      // Just track it for now
+      // Like logic (vocal or visual feedback already handled in VideoFeed)
     }
-  }, [savedItems, tripItems]);
+  }, [savedItems, addToTripLogic]);
 
-  const itinerary = useMemo(() => generateItinerary(tripItems), [tripItems]);
-
-  const removeFromTrip = (id: string) => {
-    setTripItems(prev => prev.filter(item => item.id !== id));
-  };
-
-  const addToTripFromSaved = (video: VideoCard) => {
-    if (!tripItems.some(item => item.id === video.id)) {
-      setTripItems(prev => [...prev, video]);
-    }
+  const handleAddAllFromSocial = (items: VideoCard[]) => {
+    items.forEach(item => addToTripLogic(item));
+    setScreen('itinerary');
   };
 
   const renderScreen = () => {
@@ -88,18 +103,17 @@ const App: React.FC = () => {
       case 'onboarding':
         return <Onboarding onComplete={handleOnboardingComplete} />;
       case 'feed':
-        return <VideoFeed videos={MOCK_VIDEOS} onSwipe={handleSwipe} tripCount={tripItems.length} />;
+        return <VideoFeed videos={MOCK_VIDEOS} onSwipe={handleSwipe} tripCount={trips.reduce((sum, t) => sum + t.items.length, 0)} />;
       case 'library':
-        return <Library saved={savedItems} tripItems={tripItems} onAddToTrip={addToTripFromSaved} onNavigateToTrip={() => setScreen('itinerary')} />;
+        return <Library saved={savedItems} tripItems={[]} onAddToTrip={addToTripLogic} onNavigateToTrip={() => setScreen('itinerary')} />;
       case 'itinerary':
-        return <ItineraryBuilder itinerary={itinerary} onRemove={removeFromTrip} onBook={() => setScreen('booking')} />;
-
-      case 'trip-mode':
-        return <TripMode itinerary={itinerary} />;
+        return <ItineraryBuilder trips={trips} onRemoveTrip={(id) => setTrips(prev => prev.filter(t => t.id !== id))} />;
+      case 'instagram':
+        return <InstagramImport onAddAll={handleAddAllFromSocial} />;
       case 'booking':
         return <Booking onBack={() => setScreen('feed')} />;
       default:
-        return <VideoFeed videos={MOCK_VIDEOS} onSwipe={handleSwipe} tripCount={tripItems.length} />;
+        return <VideoFeed videos={MOCK_VIDEOS} onSwipe={handleSwipe} tripCount={trips.reduce((sum, t) => sum + t.items.length, 0)} />;
     }
   };
 
@@ -123,7 +137,7 @@ const App: React.FC = () => {
       <Navigation
         activeScreen={screen}
         onNavigate={setScreen}
-        tripCount={tripItems.length}
+        tripCount={trips.reduce((sum, t) => sum + t.items.length, 0)}
       />
 
       {/* Mobile Top Notch/Status Bar Fill */}

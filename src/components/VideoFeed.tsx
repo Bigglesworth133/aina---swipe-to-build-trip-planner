@@ -18,14 +18,14 @@ const VideoItem: React.FC<{
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-15, 15]);
   const opacity = useTransform(x, [-200, -150, 0, 150, 200], [0, 1, 1, 1, 0]);
-  const saveOpacity = useTransform(x, [-150, -50], [1, 0]);
-  const likeOpacity = useTransform(x, [50, 150], [0, 1]);
+  const likeOpacity = useTransform(x, [-150, -50], [1, 0]);
+  const tripOpacity = useTransform(x, [50, 150], [0, 1]);
 
   const handleDragEnd = (_: any, info: any) => {
     if (info.offset.x > 100) {
-      onAction('like');
+      onAction('add_to_trip');
     } else if (info.offset.x < -100) {
-      onAction('save');
+      onAction('like');
     }
   };
 
@@ -38,30 +38,33 @@ const VideoItem: React.FC<{
         onDragEnd={handleDragEnd}
         className="h-full w-full relative touch-pan-y"
       >
-        {/* Background Media */}
+        {/* Background Media - Now Video */}
         <div className="absolute inset-0">
-          <img
+          <video
             src={video.mediaPlaceholder}
-            alt={video.title}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="h-full w-full object-cover transition-transform duration-700 scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90" />
         </div>
 
         {/* Swipe Overlays */}
+        <motion.div style={{ opacity: tripOpacity }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
+          <div className="bg-primary/80 backdrop-blur-xl p-8 rounded-full border-4 border-white/40">
+            <Plus className="w-24 h-24 text-white" />
+          </div>
+        </motion.div>
         <motion.div style={{ opacity: likeOpacity }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
           <div className="bg-white/20 backdrop-blur-xl p-8 rounded-full border-4 border-white/40">
             <Heart className="w-24 h-24 text-white fill-white" />
           </div>
         </motion.div>
-        <motion.div style={{ opacity: saveOpacity }} className="absolute inset-0 flex items-center justify-center pointer-events-none z-50">
-          <div className="bg-white/20 backdrop-blur-xl p-8 rounded-full border-4 border-white/40">
-            <Bookmark className="w-24 h-24 text-white fill-white" />
-          </div>
-        </motion.div>
 
-        {/* Content Overlay */}
-        <div className="absolute inset-x-0 bottom-0 p-6 pb-32 space-y-4">
+        {/* Content Overlay - Shifted Upwards */}
+        <div className="absolute inset-x-0 bottom-0 p-6 pb-40 space-y-4">
           <div className="flex items-center gap-2">
             <div className="glass px-3 py-1 rounded-full flex items-center gap-1.5">
               <MapPin className="w-3 h-3 text-primary" />
@@ -73,7 +76,7 @@ const VideoItem: React.FC<{
           </div>
 
           <div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-2 drop-shadow-2xl">
+            <h2 className="text-4xl font-black uppercase tracking-tighter leading-none mb-2 drop-shadow-2xl text-white">
               {video.title}
             </h2>
             <p className="text-white/80 text-sm font-medium leading-relaxed max-w-[85%] drop-shadow-md">
@@ -89,29 +92,21 @@ const VideoItem: React.FC<{
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{video.creatorHandle}</span>
             </div>
 
+            {/* Save Icon in Bottom Left style (within profile row for better flow) */}
             <button
-              onClick={() => onAction('add_to_trip')}
-              className="bg-primary text-white px-8 py-3.5 rounded-full text-[12px] font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(255,56,92,0.4)] active:scale-95 transition-all flex items-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAction('save');
+              }}
+              className="w-12 h-12 glass rounded-full flex items-center justify-center active:scale-90 transition-transform"
             >
-              Add to Trip <Plus className="w-4 h-4" />
+              <Bookmark className="w-6 h-6 text-white" />
             </button>
           </div>
         </div>
 
-        {/* Sidebar Actions */}
-        <div className="absolute right-4 bottom-40 flex flex-col gap-6 items-center">
-          <button className="flex flex-col items-center gap-1 opacity-80 active:scale-90 transition-transform">
-            <div className="w-12 h-12 glass-dark rounded-full flex items-center justify-center">
-              <Heart className="w-6 h-6" />
-            </div>
-            <span className="text-[10px] font-bold">1.2k</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 opacity-80 active:scale-90 transition-transform">
-            <div className="w-12 h-12 glass-dark rounded-full flex items-center justify-center">
-              <Bookmark className="w-6 h-6" />
-            </div>
-            <span className="text-[10px] font-bold">540</span>
-          </button>
+        {/* Sidebar Actions - Simplified */}
+        <div className="absolute right-4 bottom-48 flex flex-col gap-6 items-center">
           <button className="flex flex-col items-center gap-1 opacity-80 active:scale-90 transition-transform">
             <div className="w-12 h-12 glass-dark rounded-full flex items-center justify-center">
               <Share2 className="w-6 h-6" />

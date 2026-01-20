@@ -10,7 +10,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Iconic', 'Viewpoint'],
     creatorHandle: '@paris_romance',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/370331493.sd.mp4?s=7b23331575caade764835848bb26c3682970a24b&profile_id=139&oauth2_token_id=57447761',
     category: 'activity',
     zone: '7th Arr.'
   },
@@ -23,7 +23,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Food', 'Authentic'],
     creatorHandle: '@foodie_paris',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/434045526.sd.mp4?s=c4004907144e5170d9a6c9a8779c13d9061df4f6&profile_id=139&oauth2_token_id=57447761',
     category: 'food',
     zone: 'Les Halles'
   },
@@ -36,7 +36,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Art', 'Immersive'],
     creatorHandle: '@tokyo_tech',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/403844622.sd.mp4?s=9f2f8a846f48f654f5c9e2d78776654e99a77e5e&profile_id=139&oauth2_token_id=57447761',
     category: 'activity',
     zone: 'Odaiba'
   },
@@ -49,7 +49,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Food', 'Nightlife'],
     creatorHandle: '@ninja_food',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/510850877.sd.mp4?s=d9e924754d9134375b6305f6396f42a1705608b4&profile_id=139&oauth2_token_id=57447761',
     category: 'nightlife',
     zone: 'Shinjuku'
   },
@@ -62,7 +62,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Skyline', 'Viewpoint'],
     creatorHandle: '@ny_high',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/340322131.sd.mp4?s=120a10df7686866f8e75294025da7227c9a6289b&profile_id=139&oauth2_token_id=57447761',
     category: 'activity',
     zone: 'Midtown'
   },
@@ -75,7 +75,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Food', 'Iconic'],
     creatorHandle: '@deliman',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/510850877.sd.mp4?s=d9e924754d9134375b6305f6396f42a1705608b4&profile_id=139&oauth2_token_id=57447761',
     category: 'food',
     zone: 'Lower East Side'
   },
@@ -88,7 +88,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Sunset', 'Luxury'],
     creatorHandle: '@bali_babe',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/322744444.sd.mp4?s=fd4f8f411a681335f606822c608f6732958348d6&profile_id=139&oauth2_token_id=57447761',
     category: 'nightlife',
     zone: 'Uluwatu'
   },
@@ -101,7 +101,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Nature', 'Photo-Op'],
     creatorHandle: '@ubud_explorer',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/332773304.sd.mp4?s=a7698547477685aa3a6a16220556514798364c76&profile_id=139&oauth2_token_id=57447761',
     category: 'activity',
     zone: 'Ubud'
   },
@@ -114,7 +114,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Food', 'Design'],
     creatorHandle: '@london_chic',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/467268846.sd.mp4?s=016c526d70834317135e610d7a9616d004144368&profile_id=139&oauth2_token_id=57447761',
     category: 'food',
     zone: 'Mayfair'
   },
@@ -127,7 +127,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Art', 'Hidden Gem'],
     creatorHandle: '@neon_hunter',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?q=80&w=800&auto=format&fit=crop',
+    mediaPlaceholder: 'https://player.vimeo.com/external/432924194.sd.mp4?s=016d0486b72a6e97576f3041927c36c69431448b&profile_id=139&oauth2_token_id=57447761',
     category: 'activity',
     zone: 'Walthamstow'
   }

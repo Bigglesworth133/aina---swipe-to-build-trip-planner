@@ -37,10 +37,11 @@ export interface ItineraryItem extends VideoCard {
 export interface Trip {
   id: string;
   name: string;
-  cities: string[];
-  items: ItineraryItem[];
-  members: string[];
+  city: string;
+  country: string;
+  items: VideoCard[];
+  createdAt: number;
 }
 
-export type AppScreen = 'onboarding' | 'feed' | 'library' | 'itinerary' | 'trip-mode' | 'spec' | 'booking';
+export type AppScreen = 'onboarding' | 'feed' | 'library' | 'itinerary' | 'trip-mode' | 'spec' | 'booking' | 'instagram';
 

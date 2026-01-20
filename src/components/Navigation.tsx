@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppScreen } from '../types';
-import { Compass, Bookmark, Map, Layout, Zap } from 'lucide-react';
+import { Compass, Bookmark, Map, Layout, Zap, Instagram } from 'lucide-react';
 import { cn } from '../services/utils';
 
 interface NavigationProps {
@@ -12,9 +12,9 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ activeScreen, onNavigate, tripCount }) => {
   const navItems = [
     { id: 'feed' as AppScreen, label: 'Explore', icon: Compass },
-    { id: 'library' as AppScreen, label: 'Saved', icon: Bookmark },
-    { id: 'itinerary' as AppScreen, label: 'Itinerary', icon: Layout },
-    { id: 'trip-mode' as AppScreen, label: 'Today', icon: Zap },
+    { id: 'library' as AppScreen, label: 'Library', icon: Bookmark },
+    { id: 'itinerary' as AppScreen, label: 'Trips', icon: Layout },
+    { id: 'instagram' as AppScreen, label: 'Social', icon: Instagram },
   ];
 
   if (activeScreen === 'onboarding') return null;
