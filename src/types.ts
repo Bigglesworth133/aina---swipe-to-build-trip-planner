@@ -20,6 +20,7 @@ export interface VideoCard {
   mediaPlaceholder: string;
   category: TravelCategory;
   zone: string;
+  type?: 'video' | 'image';
 }
 
 export interface SwipeEvent {

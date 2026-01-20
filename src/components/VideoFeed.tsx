@@ -38,17 +38,25 @@ const VideoItem: React.FC<{
         onDragEnd={handleDragEnd}
         className="h-full w-full relative touch-pan-y"
       >
-        {/* Background Media - High Reliability Video */}
+        {/* Background Media - Image or Video */}
         <div className="absolute inset-0">
-          <video
-            src={video.mediaPlaceholder}
-            autoPlay
-            loop
-            muted
-            playsInline
-            controls
-            className="h-full w-full object-cover transition-transform duration-700 scale-105"
-          />
+          {video.type === 'image' ? (
+            <img
+              src={video.mediaPlaceholder}
+              className="h-full w-full object-cover transition-transform duration-700 scale-105"
+              alt={video.title}
+            />
+          ) : (
+            <video
+              src={video.mediaPlaceholder}
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              className="h-full w-full object-cover transition-transform duration-700 scale-105"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90" />
         </div>
 

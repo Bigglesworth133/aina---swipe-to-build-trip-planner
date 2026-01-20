@@ -12,7 +12,8 @@ export const MOCK_VIDEOS: VideoCard[] = [
     creatorHandle: '@paris_romance',
     mediaPlaceholder: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     category: 'activity',
-    zone: '7th Arr.'
+    zone: '7th Arr.',
+    type: 'video'
   },
   {
     id: 'v2',
@@ -23,9 +24,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Food', 'Authentic'],
     creatorHandle: '@foodie_paris',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2016/09/13/5108-182315744_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800',
     category: 'food',
-    zone: 'Les Halles'
+    zone: 'Les Halles',
+    type: 'image'
   },
   {
     id: 'v3',
@@ -36,9 +38,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Art', 'Immersive'],
     creatorHandle: '@tokyo_tech',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2021/08/17/85375-589574169_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=800',
     category: 'activity',
-    zone: 'Odaiba'
+    zone: 'Odaiba',
+    type: 'image'
   },
   {
     id: 'v4',
@@ -49,9 +52,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Food', 'Nightlife'],
     creatorHandle: '@ninja_food',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2024/05/27/213968_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=800',
     category: 'nightlife',
-    zone: 'Shinjuku'
+    zone: 'Shinjuku',
+    type: 'image'
   },
   {
     id: 'v5',
@@ -62,9 +66,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Skyline', 'Viewpoint'],
     creatorHandle: '@ny_high',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2020/09/21/50616-462376991_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1496442226666-8d4a0e62e6e9?q=80&w=800',
     category: 'activity',
-    zone: 'Midtown'
+    zone: 'Midtown',
+    type: 'image'
   },
   {
     id: 'v6',
@@ -75,9 +80,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Food', 'Iconic'],
     creatorHandle: '@deliman',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2020/05/25/40040-424103859_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1519690889869-e705e59f72e1?q=80&w=800',
     category: 'food',
-    zone: 'Lower East Side'
+    zone: 'Lower East Side',
+    type: 'image'
   },
   {
     id: 'v7',
@@ -88,9 +94,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Sunset', 'Luxury'],
     creatorHandle: '@bali_babe',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2023/12/03/191799-890833156_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=800',
     category: 'nightlife',
-    zone: 'Uluwatu'
+    zone: 'Uluwatu',
+    type: 'image'
   },
   {
     id: 'v8',
@@ -101,9 +108,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Nature', 'Photo-Op'],
     creatorHandle: '@ubud_explorer',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2020/02/03/31901-389333534_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800',
     category: 'activity',
-    zone: 'Ubud'
+    zone: 'Ubud',
+    type: 'image'
   },
   {
     id: 'v9',
@@ -114,9 +122,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Food', 'Design'],
     creatorHandle: '@london_chic',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2023/11/17/189392-884814983_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1579782522047-e23157585a44?q=80&w=800',
     category: 'food',
-    zone: 'Mayfair'
+    zone: 'Mayfair',
+    type: 'image'
   },
   {
     id: 'v10',
@@ -127,8 +136,9 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Art', 'Hidden Gem'],
     creatorHandle: '@neon_hunter',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2023/11/14/188998-884394042_tiny.mp4',
+    mediaPlaceholder: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800',
     category: 'activity',
-    zone: 'Walthamstow'
+    zone: 'Walthamstow',
+    type: 'image'
   }
 ];
