@@ -47,7 +47,6 @@ const VideoItem: React.FC<{
             muted
             playsInline
             controls
-            style={{ border: '4px solid red' }}
             className="h-full w-full object-cover transition-transform duration-700 scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90" />
@@ -128,7 +127,7 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ videos, onSwipe, tripCount }) => 
 
   const handleAction = (videoId: string, action: 'like' | 'save' | 'add_to_trip') => {
     onSwipe(videoId, action);
-    setFeedback(action.toUpperCase().replace('_', ' '));
+    setFeedback(action.toUpperCase().split('_').join(' '));
     setTimeout(() => setFeedback(null), 1000);
 
     // Auto scroll to next if it was 'add_to_trip' ? Or maybe not.
