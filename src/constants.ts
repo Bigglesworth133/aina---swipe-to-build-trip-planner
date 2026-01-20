@@ -10,7 +10,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Iconic', 'Viewpoint'],
     creatorHandle: '@paris_romance',
-    mediaPlaceholder: 'https://player.vimeo.com/external/370331493.sd.mp4?s=7b23331575caade764835848bb26c3682970a24b&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2024/02/22/201502-915494191_tiny.mp4',
     category: 'activity',
     zone: '7th Arr.'
   },
@@ -23,7 +23,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Food', 'Authentic'],
     creatorHandle: '@foodie_paris',
-    mediaPlaceholder: 'https://player.vimeo.com/external/434045526.sd.mp4?s=c4004907144e5170d9a6c9a8779c13d9061df4f6&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2016/09/13/5108-182315744_tiny.mp4',
     category: 'food',
     zone: 'Les Halles'
   },
@@ -36,7 +36,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Art', 'Immersive'],
     creatorHandle: '@tokyo_tech',
-    mediaPlaceholder: 'https://player.vimeo.com/external/403844622.sd.mp4?s=9f2f8a846f48f654f5c9e2d78776654e99a77e5e&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2021/08/17/85375-589574169_tiny.mp4',
     category: 'activity',
     zone: 'Odaiba'
   },
@@ -49,7 +49,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Food', 'Nightlife'],
     creatorHandle: '@ninja_food',
-    mediaPlaceholder: 'https://player.vimeo.com/external/510850877.sd.mp4?s=d9e924754d9134375b6305f6396f42a1705608b4&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2024/05/27/213968_tiny.mp4',
     category: 'nightlife',
     zone: 'Shinjuku'
   },
@@ -62,7 +62,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Skyline', 'Viewpoint'],
     creatorHandle: '@ny_high',
-    mediaPlaceholder: 'https://player.vimeo.com/external/340322131.sd.mp4?s=120a10df7686866f8e75294025da7227c9a6289b&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2020/09/21/50616-462376991_tiny.mp4',
     category: 'activity',
     zone: 'Midtown'
   },
@@ -75,7 +75,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Food', 'Iconic'],
     creatorHandle: '@deliman',
-    mediaPlaceholder: 'https://player.vimeo.com/external/510850877.sd.mp4?s=d9e924754d9134375b6305f6396f42a1705608b4&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2020/05/25/40040-424103859_tiny.mp4',
     category: 'food',
     zone: 'Lower East Side'
   },
@@ -88,7 +88,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Sunset', 'Luxury'],
     creatorHandle: '@bali_babe',
-    mediaPlaceholder: 'https://player.vimeo.com/external/322744444.sd.mp4?s=fd4f8f411a681335f606822c608f6732958348d6&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2023/12/03/191799-890833156_tiny.mp4',
     category: 'nightlife',
     zone: 'Uluwatu'
   },
@@ -101,7 +101,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Nature', 'Photo-Op'],
     creatorHandle: '@ubud_explorer',
-    mediaPlaceholder: 'https://player.vimeo.com/external/332773304.sd.mp4?s=a7698547477685aa3a6a16220556514798364c76&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2020/02/03/31901-389333534_tiny.mp4',
     category: 'activity',
     zone: 'Ubud'
   },
@@ -114,7 +114,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€€',
     tags: ['Food', 'Design'],
     creatorHandle: '@london_chic',
-    mediaPlaceholder: 'https://player.vimeo.com/external/467268846.sd.mp4?s=016c526d70834317135e610d7a9616d004144368&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2023/11/17/189392-884814983_tiny.mp4',
     category: 'food',
     zone: 'Mayfair'
   },
@@ -127,7 +127,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€',
     tags: ['Art', 'Hidden Gem'],
     creatorHandle: '@neon_hunter',
-    mediaPlaceholder: 'https://player.vimeo.com/external/432924194.sd.mp4?s=016d0486b72a6e97576f3041927c36c69431448b&profile_id=139&oauth2_token_id=57447761',
+    mediaPlaceholder: 'https://cdn.pixabay.com/video/2023/11/14/188998-884394042_tiny.mp4',
     category: 'activity',
     zone: 'Walthamstow'
   }

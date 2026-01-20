@@ -72,7 +72,7 @@ const Library: React.FC<LibraryProps> = ({ saved, trips, onAddToTrip, onNavigate
                   const isInTrip = trips.some(t => t.items.some(ti => ti.id === item.id));
                   return (
                     <div key={item.id} className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-white/5 border border-white/10">
-                      <img src={item.mediaPlaceholder.replace('.mp4', '.jpg')} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                      <img src={`https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=400`} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
 
                       <div className="absolute inset-x-0 bottom-0 p-3 space-y-1">

@@ -121,7 +121,7 @@ const ItineraryBuilder: React.FC<ItineraryBuilderProps> = ({ trips, onRemoveTrip
               className="relative aspect-[4/3] rounded-[40px] overflow-hidden group active:scale-[0.98] transition-all"
             >
               <img
-                src={trip.items[0]?.mediaPlaceholder ? trip.items[0].mediaPlaceholder.replace('.mp4', '.jpg') : `https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600`}
+                src={`https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600`}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 alt={trip.name}
               />

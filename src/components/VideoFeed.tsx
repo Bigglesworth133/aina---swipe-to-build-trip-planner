@@ -38,7 +38,7 @@ const VideoItem: React.FC<{
         onDragEnd={handleDragEnd}
         className="h-full w-full relative touch-pan-y"
       >
-        {/* Background Media - Now Video */}
+        {/* Background Media - High Reliability Video */}
         <div className="absolute inset-0">
           <video
             src={video.mediaPlaceholder}
