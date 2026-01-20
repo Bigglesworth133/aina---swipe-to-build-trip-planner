@@ -1,0 +1,8 @@
+{
+  "name": "AINA - Swipe to Build Trip Planner",
+  "description": "A video-first travel planning prototype where users discover experiences through swipes and automatically generate itineraries.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
