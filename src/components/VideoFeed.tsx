@@ -46,6 +46,8 @@ const VideoItem: React.FC<{
             loop
             muted
             playsInline
+            controls
+            style={{ border: '4px solid red' }}
             className="h-full w-full object-cover transition-transform duration-700 scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90" />

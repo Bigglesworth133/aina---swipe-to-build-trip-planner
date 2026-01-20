@@ -10,7 +10,7 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Iconic', 'Viewpoint'],
     creatorHandle: '@paris_romance',
-    mediaPlaceholder: 'https://cdn.pixabay.com/video/2024/02/22/201502-915494191_tiny.mp4',
+    mediaPlaceholder: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     category: 'activity',
     zone: '7th Arr.'
   },
