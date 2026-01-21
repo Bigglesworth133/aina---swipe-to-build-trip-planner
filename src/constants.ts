@@ -66,10 +66,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Skyline', 'Viewpoint'],
     creatorHandle: '@ny_high',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1496442226666-8d4a0e62e6e9?q=80&w=800',
+    mediaPlaceholder: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     category: 'activity',
     zone: 'Midtown',
-    type: 'image'
+    type: 'video'
   },
   {
     id: 'v6',
@@ -80,10 +80,10 @@ export const MOCK_VIDEOS: VideoCard[] = [
     priceRange: '€€',
     tags: ['Food', 'Iconic'],
     creatorHandle: '@deliman',
-    mediaPlaceholder: 'https://images.unsplash.com/photo-1519690889869-e705e59f72e1?q=80&w=800',
+    mediaPlaceholder: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     category: 'food',
     zone: 'Lower East Side',
-    type: 'image'
+    type: 'video'
   },
   {
     id: 'v7',
