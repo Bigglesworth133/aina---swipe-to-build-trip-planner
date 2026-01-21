@@ -101,41 +101,44 @@ const VideoItem: React.FC<{
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{video.creatorHandle}</span>
             </div>
 
-            {/* Sidebar Actions - Aligned Vertical Stack */}
-            <div className="absolute right-4 bottom-32 flex flex-col gap-4 items-center z-20">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAction('save');
-                }}
-                className="flex flex-col items-center gap-1 active:scale-90 transition-transform"
-              >
-                <div className="w-12 h-12 glass rounded-full flex items-center justify-center">
-                  <Bookmark className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-[10px] font-bold drop-shadow-md">Save</span>
-              </button>
-
-              <button className="flex flex-col items-center gap-1 opacity-90 active:scale-90 transition-transform">
-                <div className="w-12 h-12 glass rounded-full flex items-center justify-center">
-                  <Share2 className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-bold drop-shadow-md">Share</span>
-              </button>
-            </div>
-          </motion.div>
+          </div>
         </div>
-        );
+
+        {/* Sidebar Actions - Aligned Vertical Stack */}
+        <div className="absolute right-4 bottom-32 flex flex-col gap-4 items-center z-20">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onAction('save');
+            }}
+            className="flex flex-col items-center gap-1 active:scale-90 transition-transform"
+          >
+            <div className="w-12 h-12 glass rounded-full flex items-center justify-center">
+              <Bookmark className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-[10px] font-bold drop-shadow-md">Save</span>
+          </button>
+
+          <button className="flex flex-col items-center gap-1 opacity-90 active:scale-90 transition-transform">
+            <div className="w-12 h-12 glass rounded-full flex items-center justify-center">
+              <Share2 className="w-6 h-6" />
+            </div>
+            <span className="text-[10px] font-bold drop-shadow-md">Share</span>
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  );
 };
 
-        const VideoFeed: React.FC<VideoFeedProps> = ({videos, onSwipe, tripCount}) => {
+const VideoFeed: React.FC<VideoFeedProps> = ({ videos, onSwipe, tripCount }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-          const [feedback, setFeedback] = useState<string | null>(null);
-          const containerRef = useRef<HTMLDivElement>(null);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleAction = (videoId: string, action: 'like' | 'save' | 'add_to_trip') => {
-              onSwipe(videoId, action);
-            setFeedback(action.toUpperCase().split('_').join(' '));
+    onSwipe(videoId, action);
+    setFeedback(action.toUpperCase().split('_').join(' '));
     setTimeout(() => setFeedback(null), 1000);
 
     // Auto scroll to next if it was 'add_to_trip' ? Or maybe not.
@@ -144,72 +147,72 @@ const VideoItem: React.FC<{
   const handleScroll = () => {
     if (containerRef.current) {
       const index = Math.round(containerRef.current.scrollTop / window.innerHeight);
-            if (index !== activeIndex) {
-              setActiveIndex(index);
+      if (index !== activeIndex) {
+        setActiveIndex(index);
       }
     }
   };
 
-            return (
-            <div className="relative h-full w-full bg-black">
-              {/* Header */}
-              <div className="absolute top-0 inset-x-0 p-8 flex justify-between items-start z-40 pointer-events-none">
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black italic tracking-tighter text-white drop-shadow-xl">AINA</span>
-                  <div className="flex items-center gap-1.5 opacity-60">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em]">Live Explorer</span>
-                  </div>
-                </div>
-                <div className="glass-dark px-4 py-2 rounded-2xl flex flex-col items-end border border-white/5">
-                  <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em] mb-0.5">Found</span>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xl font-black text-primary">{tripCount}</span>
-                    <NavIcon className="w-3 h-3 text-primary fill-primary" />
-                  </div>
-                </div>
-              </div>
+  return (
+    <div className="relative h-full w-full bg-black">
+      {/* Header */}
+      <div className="absolute top-0 inset-x-0 p-8 flex justify-between items-start z-40 pointer-events-none">
+        <div className="flex flex-col">
+          <span className="text-3xl font-black italic tracking-tighter text-white drop-shadow-xl">AINA</span>
+          <div className="flex items-center gap-1.5 opacity-60">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Live Explorer</span>
+          </div>
+        </div>
+        <div className="glass-dark px-4 py-2 rounded-2xl flex flex-col items-end border border-white/5">
+          <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em] mb-0.5">Found</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-xl font-black text-primary">{tripCount}</span>
+            <NavIcon className="w-3 h-3 text-primary fill-primary" />
+          </div>
+        </div>
+      </div>
 
-              {/* Snap Container */}
-              <div
-                ref={containerRef}
-                onScroll={handleScroll}
-                className="snap-y-container no-scrollbar"
-              >
-                {videos.map((video, idx) => (
-                  <VideoItem
-                    key={video.id}
-                    video={video}
-                    isActive={idx === activeIndex}
-                    onAction={(action) => handleAction(video.id, action)}
-                  />
-                ))}
-              </div>
+      {/* Snap Container */}
+      <div
+        ref={containerRef}
+        onScroll={handleScroll}
+        className="snap-y-container no-scrollbar"
+      >
+        {videos.map((video, idx) => (
+          <VideoItem
+            key={video.id}
+            video={video}
+            isActive={idx === activeIndex}
+            onAction={(action) => handleAction(video.id, action)}
+          />
+        ))}
+      </div>
 
-              {/* Feedback Toast */}
-              <AnimatePresence>
-                {feedback && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none"
-                  >
-                    <div className="bg-primary text-white px-8 py-4 rounded-3xl font-black text-2xl uppercase italic tracking-tighter shadow-[0_0_40px_rgba(255,56,92,0.6)] border-2 border-white/20">
-                      {feedback}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="absolute bottom-24 right-6 pointer-events-none opacity-40">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-0.5 h-12 bg-gradient-to-t from-white to-transparent rounded-full animate-bounce" />
-                  <span className="text-[10px] font-black uppercase tracking-widest [writing-mode:vertical-lr]">Swipe Up</span>
-                </div>
-              </div>
+      {/* Feedback Toast */}
+      <AnimatePresence>
+        {feedback && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none"
+          >
+            <div className="bg-primary text-white px-8 py-4 rounded-3xl font-black text-2xl uppercase italic tracking-tighter shadow-[0_0_40px_rgba(255,56,92,0.6)] border-2 border-white/20">
+              {feedback}
             </div>
-            );
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="absolute bottom-24 right-6 pointer-events-none opacity-40">
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-0.5 h-12 bg-gradient-to-t from-white to-transparent rounded-full animate-bounce" />
+          <span className="text-[10px] font-black uppercase tracking-widest [writing-mode:vertical-lr]">Swipe Up</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-            export default VideoFeed;
+export default VideoFeed;
